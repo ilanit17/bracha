@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ברכות לשנה חדשה - דוד אשל</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;800&display=swap');
+
+        :root {
+            --color-gold: #D4AF37;
+            --color-honey: #EAAA00;
+            --color-cream: #F5EFE6;
+            --text-dark: #3A2E2F;
+            --text-light: #6D615E;
+            --background-page: #FAF6F0;
+            --color-highlight-blue: #4A6C8C; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--background-page);
+            min-height: 100vh;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1000px; /* הורחב כדי לתת מקום ברור לשתי עמודות */
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-family: 'Heebo', sans-serif;
+            font-size: 3.8em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .subtitle {
+            font-size: 1.6em;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-top: 5px;
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.25em;
+            color: var(--text-dark);
+            margin-bottom: 35px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro em {
+            color: var(--color-honey);
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            /* ======================================= */
+            /* כאן השינוי: קביעה מפורשת של 2 עמודות */
+            grid-template-columns: 1fr 1fr;
+            /* ======================================= */
+            gap: 25px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-card {
+            background-color: var(--color-cream);
+            border-radius: 18px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .letter-card:nth-child(4n+1) { background-color: #F5EFE6; } 
+        .letter-card:nth-child(4n+2) { background-color: #F8E5BA; } 
+        .letter-card:nth-child(4n+3) { background-color: #E8B4B8; } 
+        .letter-card:nth-child(4n+4) { background-color: #F0D7A3; } 
+
+
+        .letter-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(58, 46, 47, 0.12);
+        }
+        
+        .letter-card.active {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(58, 46, 47, 0.15);
+            border-color: var(--color-honey);
+        }
+        
+        .letter {
+            font-family: 'Heebo', sans-serif;
+            font-size: 4em;
+            font-weight: 500;
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+            max-height: 100px;
+            opacity: 1;
+        }
+
+        .blessing {
+            font-size: 1.15em;
+            line-height: 1.7;
+            color: var(--text-dark);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-out, opacity 0.5s ease-out, margin-top 0.6s ease-out;
+            opacity: 0;
+            position: relative;
+            z-index: 2;
+            padding: 0 10px;
+            margin-top: 0;
+        }
+
+        .letter-card.active .blessing {
+            max-height: 250px;
+            opacity: 1;
+            margin-top: -10px; 
+        }
+
+        .letter-card.active .letter {
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+        }
+
+        .highlighted {
+            color: var(--color-highlight-blue);
+            font-weight: 800; 
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 1.3em;
+            color: var(--text-dark);
+            margin-top: 40px;
+            padding: 25px;
+            background-color: rgba(245, 239, 230, 0.8);
+            border-radius: 18px;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .footer strong {
+            color: var(--color-highlight-blue);
+            font-weight: 700;
+        }
+
+        .toggle-all {
+            margin: 25px auto 35px auto;
+            display: block;
+            padding: 14px 35px;
+            background-color: var(--color-honey);
+            color: var(--text-dark);
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-all:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background-color: var(--color-gold);
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 20px 15px; }
+            .container { padding: 30px; }
+            .title { font-size: 2.8em; }
+            .subtitle { font-size: 1.3em; }
+            .grid { 
+                /* במסכים קטנים, עוברים לעמודה אחת */
+                grid-template-columns: 1fr; 
+                gap: 15px; 
+            }
+            .letter-card { min-height: 120px; }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            .title {
+                font-size: 2.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">בְּרָכוֹת לְשָׁנָה חֲדָשָׁה</h1>
+            <p class="subtitle">מאת דוד אשל</p>
+        </div>
+        
+        <div class="intro">
+            שׁוּב חָלְפָה שָׁנָה קָשָׁה וְעַתָּה רֵאשִׁית שֶׁל חֲדָשָׁה<br>
+            נָעֲלֶה כָּאן עַל הַכְּתָב בְּרָכוֹת מֵאָלֶף וְעַד תָּו<br>
+            <em>לחצו על כל אות לגילוי הברכה</em>
+        </div>
+        
+        <button class="toggle-all" onclick="toggleAll()">גלה את כל הברכות</button>
+        
+        <div class="grid" id="lettersGrid">
+            <!-- Cards will be generated by JavaScript -->
+        </div>
+        
+        <div class="footer">
+            לִבְרָכוֹת מֵאָלֶף וְעַד תָּו<br>
+            כָּל קוֹרֵא הִנּוֹ מוּטָב<br>
+            <strong>שנה טובה ומתוקה!</strong>
+        </div>
+    </div>
+    
+    <script>
+        const blessings = [
+            { letter: 'א', text: 'שָׁנָה שֶׁל הֲנָ<span class="highlighted">אָ</span>ה<br>תְּהֵא שְׁנָתֵנוּ הַבָּ<span class="highlighted">אָ</span>ה' },
+            { letter: 'ב', text: 'לֹא תְּהֵא בָּהּ כָּל אֵי<span class="highlighted">בָ</span>ה<br>תְּהֵא צְרוּפָה בְּאַהֲ<span class="highlighted">בָ</span>ה' },
+            { letter: 'ג', text: 'שָׁנָה שֶׁאֵין בָּהּ דָּאֲ<span class="highlighted">גָ</span>ה<br>וְכָל כֻּלָּהּ רַק חֲגִי<span class="highlighted">גָ</span>ה' },
+            { letter: 'ד', text: 'בָּהּ נַרְבֶּה לוֹמַר תּוֹ<span class="highlighted">דָ</span>ה<br>וּמִן הָרַע נָחוּשׁ סְלִי<span class="highlighted">דָ</span>ה' },
+            { letter: 'ה', text: 'שָׁנָה שֶׁל אוֹר וּנְגוֹ<span class="highlighted">הָ</span>ה<br>לְלֹא חֲלוֹם שֶׁל בַּלָּ<span class="highlighted">הָ</span>ה' },
+            { letter: 'ו', text: 'מִצְ<span class="highlighted">וָ</span>ה תִּרְדֹּף מִצְ<span class="highlighted">וָ</span>ה<br>תִּשְׁלֹט בָּהּ הַתִּקְ<span class="highlighted">וָ</span>ה' },
+            { letter: 'ז', text: 'תִּמְעַט בָּאָרֶץ הָרֻגְ<span class="highlighted">זָ</span>ה<br>אֲבָל תִּגְבַּר הָאֲחִי<span class="highlighted">זָ</span>ה' },
+            { letter: 'ח', text: 'תֻּפְחַת מְאֹד הַהַנְצָ<span class="highlighted">חָ</span>ה<br>תִּגְדַּל מְאֹד הַהַצְלָ<span class="highlighted">חָ</span>ה' },
+            { letter: 'ט', text: 'תְּהֵא זֹאת שְׁנַת קְלִי<span class="highlighted">טָ</span>ה<br>שִׁפּוּר אֱמֶת גַּם בַּשְּׁפִי<span class="highlighted">טָ</span>ה' },
+            { letter: 'י', text: 'שָׁנָה שֶׁאֵין בָּהּ אַפְלָ<span class="highlighted">יָ</span>ה<br>וְלֹא תָּצוּץ עוֹד פַּרְשִׁ<span class="highlighted">יָּ</span>ה' },
+            { letter: 'כ', text: 'שָׁנָה שֶׁבָּהּ נַפְגִּין תְּמִי<span class="highlighted">כָ</span>ה<br>שִׂמְחָה תִּשְׁרֶה וְלֹא "אֵי<span class="highlighted">כָ</span>ה"' },
+            { letter: 'ל', text: 'לֹא נִמְצָא בָּהּ כָּל עַוְ<span class="highlighted">לָ</span>ה<br>וְלֹא נִשְׁמַע יוֹתֵר קְלָ<span class="highlighted">לָ</span>ה' },
+            { letter: 'מ', text: 'שֶׁתְּהֵא שָׁנָה גְּשׁוּ<span class="highlighted">מָ</span>ה<br>וּשְׁלוֹם בַּיִת בָּאוּ<span class="highlighted">מָ</span>ה' },
+            { letter: 'נ', text: 'בִּטָּחוֹן לְעֵת זִקְ<span class="highlighted">נָ</span>ה<br>וְלֹא עָלֵינוּ הַקְּרִי<span class="highlighted">נָ</span>ה' },
+            { letter: 'ס', text: 'עַל כָּל אוֹיְבֵינוּ הַתְּבוּ<span class="highlighted">סָ</span>ה<br>וְעַל רֹאשֵׁנוּ פַּרְנָ<span class="highlighted">סָ</span>ה' },
+            { letter: 'ע', text: 'צִמְצוּם לָאֶפֶס בַּפְּשִׁי<span class="highlighted">עָ</span>ה<br>וּלְנִבְחָרֵינוּ קְצָת צִנְ<span class="highlighted">עָ</span>ה' },
+            { letter: 'פ', text: 'שָׁנָה שֶׁבָּהּ תָּחוּל תְּנוּ<span class="highlighted">פָ</span>ה<br>לְכָל חֹלִי תֻּמְצָא תְּרוּ<span class="highlighted">פָ</span>ה' },
+            { letter: 'צ', text: 'שָׁנָה שֶׁבָּהּ מִשְׁקַל נוֹ<span class="highlighted">צָ</span>ה<br>יִהְיֶה עֶרְכּוֹ שֶׁל הַמּוֹ<span class="highlighted">צָ</span>א' },
+            { letter: 'ק', text: 'שָׁנָה טוֹבָה וּמְתוּ<span class="highlighted">קָ</span>ה<br>שֶׁבָּהּ נַרְבֶּה לָתֵת צְדָ<span class="highlighted">קָ</span>ה' },
+            { letter: 'ר', text: 'שָׁנָה שֶׁבָּהּ נִסּוֹג מֵ<span class="highlighted">רַ</span>ע<br>וּבָהּ נַרְבֶּה בְּקוֹל זִמְ<span class="highlighted">רָ</span>ה' },
+            { letter: 'ש', text: 'שֶׁלֹּא נָחוּשׁ בָּהּ כָּל חֻלְ<span class="highlighted">שָׁ</span>ה<br>וְלֹא נַחֲוֶה עוֹד נְטִי<span class="highlighted">שָׁ</span>ה' },
+            { letter: 'ת', text: 'שֶׁבָּהּ גַּם אַתְּ וְגַם אַ<span class="highlighted">תָּ</span>ה<br>חָשִׁים שֶׁרַק עוֹלִים כִּ<span class="highlighted">תָּ</span>ה' }
+        ];
+        
+        let allOpen = false;
+        
+        function createCards() {
+            const grid = document.getElementById('lettersGrid');
+            
+            blessings.forEach((blessing, index) => {
+                const card = document.createElement('div');
+                card.className = 'letter-card';
+                card.innerHTML = `
+                    <div class="letter">${blessing.letter}</div>
+                    <div class="blessing">${blessing.text}</div>
+                `;
+                
+                card.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        function toggleAll() {
+            const cards = document.querySelectorAll('.letter-card');
+            allOpen = !allOpen;
+            cards.forEach(card => {
+                if (allOpen) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+            
+            const button = document.querySelector('.toggle-all');
+            button.textContent = allOpen ? 'הסתר את כל הברכות' : 'גלה את כל הברכות';
+        }
+        
+        // Initialize
+        createCards();
+    </script>
+</body>
+</html>
